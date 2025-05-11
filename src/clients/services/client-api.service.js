@@ -13,5 +13,10 @@ export class ClientApiService extends BaseApiService{
         super(clientEndpoint);
     }
 
+    getById(id) {
+        return http.get(`${this.endpoint}/${id}`); // ✅ Ahora simplemente /clients/:id
+    }
+
 
 }
+

@@ -5,7 +5,7 @@ import PrimeVue from 'primevue/config'
 import {
     Avatar,
     Button, Calendar,
-    Card, Column, DataTable,
+    Card, Column, DataTable, Dialog,
     Drawer,
     Dropdown,
     Image,
@@ -33,6 +33,7 @@ app
     .component('pv-avatar', Avatar)
     .component('pv-menu', Menu)
     .component('pv-menubar', Menubar)
+    .component('pv-input-text', InputText)
     .component('pv-toolbar', Toolbar)
     .component('pv-tooltip', Tooltip)
     .component('pv-image', Image)
@@ -40,6 +41,7 @@ app
     .component('InputText', InputText)
     .component('pv-calendar', Calendar)
     .component('pv-table', DataTable)
+    .component('pv-dialog', Dialog)
     .use(i18n)
     .use(router)
     .mount('#app')

@@ -2,7 +2,20 @@ import {createApp} from 'vue'
 import './style.css'
 import App from './App.vue'
 import PrimeVue from 'primevue/config'
-import {Avatar, Button, Card, Drawer, Image, Menu, Menubar, SelectButton, Toolbar, Tooltip} from 'primevue'
+import {
+    Avatar,
+    Button, Calendar,
+    Card,
+    Drawer,
+    Dropdown,
+    Image,
+    InputText,
+    Menu,
+    Menubar,
+    SelectButton,
+    Toolbar,
+    Tooltip
+} from 'primevue'
 import Aura from '@primeuix/themes/aura';
 import i18n from "./i18n.js";
 import 'primeicons/primeicons.css';
@@ -22,6 +35,9 @@ app
     .component('pv-toolbar', Toolbar)
     .component('pv-tooltip', Tooltip)
     .component('pv-image', Image)
+    .component('pv-dropdown', Dropdown)
+    .component('InputText', InputText)
+    .component('pv-calendar', Calendar)
     .use(i18n)
     .use(router)
     .mount('#app')

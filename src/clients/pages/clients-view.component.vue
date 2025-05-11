@@ -2,9 +2,10 @@
 import ClientList from "../components/client-list.component.vue"
 import {ClientAssembler} from "../services/client.assembler"
 import {ClientApiService} from "../services/client-api.service"
+import ClientForm from "../components/client-form.component.vue"
 export default {
   name: "clients-view.component",
-  components: {ClientList},
+  components: {ClientForm, ClientList},
   data(){
     return {
       clients: []
@@ -25,6 +26,7 @@ export default {
 </script>
 <template>
   <client-list :clients="clients" />
+  <client-form></client-form>
 </template>
 
 

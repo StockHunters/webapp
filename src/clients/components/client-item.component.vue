@@ -7,7 +7,13 @@ export default defineComponent({
   components: {},
   props: {
     client: {type: Client, required: true}
+  },
+  methods: {
+    goToDetails() {
+      this.$router.push(`/clients/${this.client.id}`); // ✅ Usar client.id
+    }
   }
+
 })
 </script>
 
@@ -15,7 +21,7 @@ export default defineComponent({
   <pv-card>
     <template #title>{{client.first_name}} {{client.last_name}}</template>
     <template #content>
-      <pv-button>Ver Mas</pv-button>
+      <pv-button @click="goToDetails">Ver Mas</pv-button>
     </template>
   </pv-card>
 </template>

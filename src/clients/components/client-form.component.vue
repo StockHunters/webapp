@@ -1,20 +1,23 @@
 <script>
 import { Client } from "../models/client.entity.js";
 import { ClientApiService } from "../services/client-api.service.js";
-import {Button as PvButton, Calendar as PvCalendar, Dropdown as PvDropdown} from "primevue";
+import {Button as PvButton} from "primevue";
+
 
 export default {
   name: "client-form.component",
-  components: {PvCalendar, PvDropdown, PvButton},
+  components: {PvButton},
   data() {
     return {
       client: Client.createEmpty(),
       statusOptions: ['Vigente', 'Deudor'],
-      loading: false
+      loading: false,
+      apiService: new ClientApiService(),
     };
   },
   methods: {
     async submitForm() {
+
       try {
         this.loading = true;
         const apiService = new ClientApiService();
@@ -30,9 +33,25 @@ export default {
       } finally {
         this.loading = false;
       }
+    },
+    submitTest(){
+      this.apiService.create({
+        id: 999,
+        first_name: "Test",
+        last_name: "User",
+        phone: "123456789",
+        email: "testuser@example.com",
+        registration_date: "2025-05-11",
+        dni: "99999999",
+        status: "Vigente",
+        company: null
+      }).then(response => console.log('✅ Post Successful:', response))
+          .catch(error => console.error('❌ Post Failed:', error));
     }
   }
 };
+
+
 </script>
 
 <template>
@@ -41,41 +60,52 @@ export default {
 
     <div class="field">
       <label>Nombre</label>
-      <InputText v-model="client.first_name" required class="w-full" />
+      <InputText v-model.trim="client.first_name" required class="w-full" />
     </div>
 
     <div class="field">
       <label>Apellido</label>
-      <InputText v-model="client.last_name" required class="w-full" />
+      <InputText v-model.trim="client.last_name" required class="w-full" />
     </div>
 
     <div class="field">
       <label>Teléfono</label>
-      <InputText v-model="client.phone" required class="w-full" />
+      <InputText v-model.trim="client.phone" required class="w-full" />
     </div>
 
     <div class="field">
       <label>Email</label>
-      <InputText v-model="client.email" type="email" required class="w-full" />
+      <InputText v-model.trim="client.email" type="email" required class="w-full" />
     </div>
 
     <div class="field">
       <label>DNI</label>
-      <InputText v-model="client.dni" required class="w-full" />
+      <InputText v-model.trim="client.dni" required class="w-full" />
     </div>
 
     <div class="field">
       <label>Fecha de Registro</label>
-      <pv-calendar v-model="client.registration_date" dateFormat="yy-mm-dd" class="w-full" />
+      <pv-calendar v-model="client.registration_date" dateFormat="yy-mm-dd" class="w-full" showIcon />
     </div>
 
     <div class="field">
       <label>Estado</label>
-      <pv-dropdown v-model="client.status" :options="statusOptions" class="w-full" />
+      <pv-dropdown v-model="client.status" :options="statusOptions" placeholder="Seleccione un estado" class="w-full" />
     </div>
 
-    <pv-button :label="loading ? 'Guardando...' : 'Añadir Cliente'" :disabled="loading" type="submit" class="w-full p-button-success mt-3" />
+    <pv-button
+        :label="loading ? 'Guardando...' : 'Añadir Cliente'"
+        :disabled="loading"
+        type="submit"
+        class="w-full p-button-success mt-3"
+    />
   </form>
+
+
+
+
+
+
 </template>
 
 <style scoped>

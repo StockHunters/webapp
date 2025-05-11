@@ -25,6 +25,8 @@ export default {
 }
 </script>
 <template>
+  <h1 style="text-align: left;">Clients</h1>
+  <hr>
   <client-list :clients="clients" />
   <client-form></client-form>
 </template>

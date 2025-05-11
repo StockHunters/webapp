@@ -1,5 +1,6 @@
 <script>
 import { ClientApiService } from "../services/client-api.service.js";
+import {Column} from "primevue";
 
 export default {
   name: "client-details.component",
@@ -14,129 +15,86 @@ export default {
     const apiService = new ClientApiService();
     const response = await apiService.getById(this.id);
     this.client = response.data;
+  },
+  computed: {
+    companyData() {
+      if (!this.client) return [];
+
+      return [
+        { field: 'Id', value: this.client.id },
+        { field: 'First Name', value: this.client.first_name },
+        { field: 'Last Name', value: this.client.last_name },
+        { field: 'Phone', value: this.client.phone },
+        { field: 'Email', value: this.client.email },
+        { field: 'Registration Date', value: this.client.registration_date },
+        { field: 'Dni', value: this.client.dni },
+        { field: 'Status', value: this.client.status },
+        { field: 'Company', value: this.client.company?.business_name || '---' }
+      ];
+    }
   }
 };
 </script>
 
 <template>
+  <h1 style="text-align: left;">Clients</h1>
+  <hr>
+  <h1 class="page-title">{{ client.first_name }} {{ client.last_name }}</h1>
   <div v-if="client" class="details-container">
-    <h1 class="page-title">Cliente: {{ client.first_name }} {{ client.last_name }}</h1>
 
-    <div class="details-grid">
-      <!-- Columna Izquierda -->
-      <div class="left-column">
-        <section class="section">
-          <h3>Nombre del Cliente</h3>
-          <p>{{ client.company?.business_name || '---' }}</p>
-        </section>
 
-        <section class="section">
-          <h3>Rubro</h3>
-          <p>{{ client.company?.trade_name || '---' }}</p>
-        </section>
 
-        <section class="section">
-          <h3>Solución Implementada</h3>
-          <ul>
-            <li>Desarrollo de reportes personalizados</li>
-            <li>Visualización de productos más vendidos</li>
-            <li>Funcionalidad de descarga de reportes en PDF</li>
-            <li>Interfaz responsiva, adaptada a dispositivos móviles y escritorio</li>
-          </ul>
-        </section>
+  <pv-card style="width: 25rem; overflow: hidden; text-align: left">
+    <template #header>
 
-        <section class="section">
-          <h3>Contacto</h3>
-          <p><i class="pi pi-phone"></i> {{ client.phone || '---' }}</p>
-          <p><i class="pi pi-envelope"></i> {{ client.email || '---' }}</p>
-        </section>
+    </template>
+    <template #subtitle>Nombre de Compania</template>
+    <template #title>{{ client.company?.business_name || '---' }}</template>
+
+    <template #content>
+      <h2>Rubro</h2>
+      <p class="m-0">
+        {{ client.company?.trade_name || '---' }}
+      </p><br>
+      <h3>Solucion implementada</h3>
+
+    </template>
+    <template #footer>
+      <div class=" gap-4 mt-1">
+        <h3>Contacto</h3>
+
+        <p><i class="pi pi-phone"></i> &#9; &nbsp{{ client.phone || '---' }}</p>
+
+        <p><i class="pi pi-envelope"></i> &#9; &nbsp{{ client.email || '---' }}</p>
       </div>
+    </template>
+  </pv-card>
 
-      <!-- Columna Derecha -->
-      <div class="right-column">
-        <h3>Datos</h3>
-        <table>
-          <tr><th>RUC</th><td>{{ client.company?.ruc || '---' }}</td></tr>
-          <tr><th>Razón Social</th><td>{{ client.company?.business_name || '---' }}</td></tr>
-          <tr><th>Nombre Comercial</th><td>{{ client.company?.trade_name || '---' }}</td></tr>
-          <tr><th>Dirección</th><td>{{ client.company?.address || '---' }}</td></tr>
-          <tr><th>Teléfono</th><td>{{ client.phone }}</td></tr>
-          <tr><th>Correo Electrónico</th><td>{{ client.email }}</td></tr>
-          <tr><th>Rubro</th><td>{{ client.company?.trade_name || '---' }}</td></tr>
-          <tr><th>Fecha de Registro</th><td>{{ client.registration_date }}</td></tr>
-          <tr><th>Estado</th><td>{{ client.status }}</td></tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="action-button">
-      <pv-button label="Volver" @click="$router.back()" class="p-button-secondary" />
-    </div>
+  <pv-table :value="companyData"
+            tableStyle="min-width: 30rem"
+            :showGridlines="true">
+    <pv-column field="field" header="Campo"/>
+    <pv-column field="value" header="Valor"/>
+  </pv-table>
   </div>
+  <div class="action-button">
+    <pv-button label="Volver" @click="$router.back()" class="p-button-secondary" />
+  </div>
+
 </template>
 
 <style scoped>
 .details-container {
-  max-width: 90%;
-  margin: 2rem auto;
-  padding: 2rem;
-  color: white;
-}
-
-.page-title {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.details-grid {
   display: flex;
-  gap: 2rem;
+  flex-direction: row;
+  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-}
-
-.left-column, .right-column {
-  flex: 1 1 400px;
-}
-
-.section {
-  margin-bottom: 2rem;
-}
-
-.section h3 {
-  margin-bottom: 0.5rem;
-}
-
-.section ul {
-  list-style: disc;
-  margin-left: 1.5rem;
-}
-
-.right-column h3 {
-  margin-bottom: 1rem;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th, td {
-  text-align: left;
-  padding: 0.5rem;
-}
-
-th {
-  background-color: #2e2e2e;
-  width: 40%;
-}
-
-td {
-  background-color: #1e1e1e;
-}
-
-.action-button {
   text-align: center;
-  margin-top: 2rem;
+  gap: 3rem;
+}
+
+.action-button{
+  margin: 2rem;
+  align-self: center;
 }
 </style>

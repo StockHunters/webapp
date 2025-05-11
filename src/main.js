@@ -5,7 +5,7 @@ import PrimeVue from 'primevue/config'
 import {
     Avatar,
     Button, Calendar,
-    Card,
+    Card, Column, DataTable,
     Drawer,
     Dropdown,
     Image,
@@ -25,6 +25,7 @@ import router from "./router/index.js";
 const app = createApp(App)
 app
     .use(PrimeVue, { ripple: true, theme: { preset: Aura }})
+    .component('pv-column', Column)
     .component('pv-button', Button)
     .component('pv-card',Card)
     .component('pv-select-button', SelectButton)
@@ -38,6 +39,7 @@ app
     .component('pv-dropdown', Dropdown)
     .component('InputText', InputText)
     .component('pv-calendar', Calendar)
+    .component('pv-table', DataTable)
     .use(i18n)
     .use(router)
     .mount('#app')

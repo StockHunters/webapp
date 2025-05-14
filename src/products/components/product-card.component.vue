@@ -29,9 +29,9 @@ export default {
 </script>
 
 <template>
-  <Card style="width: 25em">
+  <Card style="width: 20em">
     <template #header>
-      <img :src="product.img_url" :alt="product.name" style="width: 100%; height: auto;"/>
+      <img :src="product.image_url" :alt="product.name" style="width: 100%; height: auto;"/>
     </template>
     <template #title>
       {{product.name}}

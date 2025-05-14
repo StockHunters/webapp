@@ -30,12 +30,17 @@ export default {
     <h1>Catálogo de Productos</h1>
     <div v-if="loading">Cargando...</div>
     <div v-else-if="error">{{ error }}</div>
-    <div v-else style="display: flex; flex-wrap: wrap; gap: 20px;">
+    <div v-else class="catalog">
       <ProductCard v-for="product in products" :key="product.id" :product="product" />
     </div>
   </div>
 </template>
 
 <style scoped>
-
+.catalog {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+}
 </style>

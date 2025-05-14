@@ -88,10 +88,10 @@ export default {
 </template>
 
 <style scoped>
-.catalog {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  justify-content: center;
-}
+  .catalog {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+  }
 </style>

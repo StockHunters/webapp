@@ -40,7 +40,7 @@ export default {
 
 <template>
   <div style="text-align: center; margin-top: 50px;">
-    <h2>Simulación de Pago con Stripe</h2>
+    <h2>Stripe Pay</h2>
     <pv-button
         label="Pagar Ahora"
         class="p-button-success"

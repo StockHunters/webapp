@@ -13,11 +13,10 @@ const routes = [
     {path: '/products', name: 'products', component: ProductCatalogComponent},
 
 ]
-const router = createRouter(
-    {
-        history: createWebHistory(),
-        routes: routes,
-    }
-)
+const router = createRouter({
+    history: createWebHistory('/Frontend-Web-Application/'), // 👈 Agrega la base aquí
+    routes: routes,
+});
+
 
 export default router;

@@ -266,3 +266,12 @@ npm run dev       # Inicia el servidor de desarrollo
 npm run build     # Compila la app para producción
 npm run preview   # Previsualiza el build de producción
 ```
+
+### Testing (Proceso)
+
+Para usar paquete de stripe:
+
+``` bash
+npm install @stripe/stripe-js
+
+```

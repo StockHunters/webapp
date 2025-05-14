@@ -6,6 +6,7 @@ export default {
 </script>
 
 <template>
+  <router-link to="/sales">Sales</router-link>
 <router-view></router-view>
 </template>
 
